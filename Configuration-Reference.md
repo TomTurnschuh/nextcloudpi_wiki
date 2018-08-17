@@ -14,6 +14,28 @@ Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 4. Confirm new password.
 4. Click Run or Start.
 
+## Automatic updates
+It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
+NextCloudPi can perform automatic updates.
+
+### NextCloudPi: nc-autoupdate-ncp
+Automatically update NextCloudPi.
+
+#### How to enable
+1. Navigate to `nc-autoupdate-ncp` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change the user to be notified when new updates are installed (default=admin).
+4. Click Run or Start.
+
+### Nextcloud: unattended-upgrades
+Enable Automatic installation of security updates to keep your cloud safe.
+
+#### How to enable
+1. Navigate to `unattended-upgrades` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change `AUTOREBOOT` to `yes` if you want your Raspberry Pi to reboot automatically in order to apply updates (optional).
+4. Click Run or Start.
+
 ## Dynamic DNS
 In order to reach the cloud from the internet, a dynamic DNS service must be enabled.
 One possibility is to do this on the local router. However, several providers are direcltly supported by NextCloudPi.
@@ -97,15 +119,6 @@ Enable this feature if you want your Rasperry Pi to automount USB drives.
 1. Navigate to `nc-automount` in the TUI or the WebUI.
 2. Change `ACTIVE` to yes.
 3. Click Run or Start.
-
-## nc-autoupdate-ncp
-Automatically update NextCloudPi.
-
-#### How to enable
-1. Navigate to `nc-autoupdate-ncp` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change the user to be notified when new updates are installed (default=admin).
-4. Click Run or Start.
 
 ## nc-backup-auto
 Perform automatic backups.
@@ -275,13 +288,4 @@ Configure SMB/CIFS file server (for Mac/Linux/Windows)
 4. Change `USER` to the NextCloudPi User (default=pi).
 5. Change `PWD` to the NextCloudPi User's Password.
 6. Click Run or Start.
-
-## unattended-upgrades
-Enable Automatic installation of security updates to keep your cloud safe.
-
-#### How to enable
-1. Navigate to `unattended-upgrades` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change `AUTOREBOOT` to `yes` if you want your Raspberry Pi to reboot automatically in order to apply updates (optional).
-4. Click Run or Start.
 
