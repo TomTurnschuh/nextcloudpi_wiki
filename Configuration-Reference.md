@@ -1,6 +1,42 @@
 [nc-scan-auto]: https://github.com/nextcloud/nextcloudpi/wiki/Configuration-Reference#nc-scan-auto
 [nc-scan]: https://github.com/nextcloud/nextcloudpi/wiki/Configuration-Reference#nc-scan
 
+## SSH access 
+
+SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
+In order to enable SSH, the password can not remain set to the default.
+You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
+Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
+
+1. Navigate to `SSH` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change the password.
+4. Confirm new password.
+4. Click Run or Start.
+
+## Dynamic DNS
+In order to reach the cloud from the internet, a dynamic DNS service must be enabled.
+One possibility is to do this on the local router. However, several providers are direcltly supported by NextCloudPi.
+
+### freeDNS
+[FreeDNS](https://freedns.afraid.org/) client.
+
+Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
+
+You need to register an account on [FreeDNS](https://freedns.afraid.org/) and setup a (sub)Domain Name.
+
+### no-ip
+Use the DDNS (Dynamic DNS) service by noip.com.
+
+Run the TUI (`nextcloud-config`) or use the WebUI.
+1. Navigate to `no-ip` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change `USER` with your user name.
+4. Change `PASS` with your password.
+5. Change `DOMAIN` with your (sub)Domain Name.
+6. Change `TIME` with the interval time you want to update the DNS record. Default 30mins.
+7. Click Run or Start.
+
 ## NFS
 Configure a NFS network file system server. This is a lightweight way to mount your cloud files through LAN in a Linux computer.
 
@@ -23,12 +59,7 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change (optional) `MAILALERTS` to activate/deactivate email notifications.
 7. Click Run (WebUI) or Start (TUI)
 
-## freeDNS
-[FreeDNS](https://freedns.afraid.org/) client.
 
-Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
-
-You need to register an account on [FreeDNS](https://freedns.afraid.org/) and setup a (sub)Domain Name.
 
 ### How to activate
 Run the TUI (`nextcloud-config`) or use the WebUI.
@@ -230,17 +261,7 @@ Enable or disable the WebUI.
 1. Navigate to `nc-webui` in the TUI or the WebUI.
 2. Change `ACTIVE` to `yes`.
 
-## no-ip
-Use the DDNS (Dynamic DNS) service by noip.com.
 
-Run the TUI (`nextcloud-config`) or use the WebUI.
-1. Navigate to `no-ip` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change `USER` with your user name.
-4. Change `PASS` with your password.
-5. Change `DOMAIN` with your (sub)Domain Name.
-6. Change `TIME` with the interval time you want to update the DNS record. Default 30mins.
-7. Click Run or Start.
 
 ## samba
 Configure SMB/CIFS file server (for Mac/Linux/Windows)
@@ -265,14 +286,3 @@ Enable Automatic installation of security updates to keep your cloud safe.
 3. Change `AUTOREBOOT` to `yes` if you want your Raspberry Pi to reboot automatically in order to apply updates (optional).
 4. Click Run or Start.
 
-### SSH Activate/deactivate 
-
-In order to enable SSH, the password for user pi can not remain set to the default raspberry.
-You HAVE to create a NEW password for pi if you want this program to enable SSH, it will fail if you dont!
-Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
-
-1. Navigate to `SSH` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change the password.
-4. Confirm new password.
-4. Click Run or Start.
