@@ -3,7 +3,7 @@
 
 [//]: Comment
 
-## SSH access
+## SSH access : `SSH`
 
 SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
 In order to enable SSH, the password can not remain set to the default.
@@ -44,7 +44,7 @@ One possibility is to do this on your local router. Nevertheless, several provid
 
 All the required data can be found in your account at the registered DDNS service provider.
 
-### freeDNS
+### Free DNS : `DDNS_freeDNS`
 [FreeDNS](https://freedns.afraid.org/) client.
 
 You need to register an account on [FreeDNS](https://freedns.afraid.org/) and setup a (sub)Domain Name.
@@ -59,7 +59,7 @@ Log in to freedns.afraid.com and click "Dynamic DNS". Right click on "Direct URL
 5. (Optional) Change the `UPDATEINTERVAL` to the interval time you want the client to update your IP (Dynamic IPs do not change that often so you can leave the default (5mins)).
 6. Click Run or Start.
 
-### no-ip
+### no-ip : `DDNS_no-ip`
 Use the DDNS (Dynamic DNS) service by [No-IP](https://www.noip.com/).
 
 Run the TUI (`nextcloud-config`) or use the WebUI.
@@ -71,11 +71,11 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change `TIME` with the interval time you want to update the DNS record. Default 30mins.
 7. Click Run or Start.
 
-### DuckDNS
+### Duck DNS : `DDNS_duckDNS`
 
 [Duck DNS](https://www.duckdns.org/) is a free dynamic DNS hosted on Amazon VPC.
 
-### spDYN
+### spDYN : `DDNS_spDYN`
 
 [spDYN](https://www.spdyn.de/) is a German dynamic DNS service provided by Securepoint GmbH.
 
