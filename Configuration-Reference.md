@@ -1,7 +1,9 @@
 [nc-scan-auto]: https://github.com/nextcloud/nextcloudpi/wiki/Configuration-Reference#nc-scan-auto
 [nc-scan]: https://github.com/nextcloud/nextcloudpi/wiki/Configuration-Reference#nc-scan
 
-## SSH access 
+[//]: Comment
+
+## SSH access
 
 SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
 In order to enable SSH, the password can not remain set to the default.
@@ -37,13 +39,13 @@ Enable Automatic installation of security updates to keep your cloud safe.
 4. Click Run or Start.
 
 ## Dynamic DNS
-In order to reach the cloud from the internet, a dynamic DNS service must be enabled.
-One possibility is to do this on the local router. However, several providers are direcltly supported by NextCloudPi.
+Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
+One possibility is to do this on your local router. Nevertheless, several providers are direcltly supported by NextCloudPi.
+
+All the required data can be found in your account at the registered DDNS service provider.
 
 ### freeDNS
 [FreeDNS](https://freedns.afraid.org/) client.
-
-Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
 
 You need to register an account on [FreeDNS](https://freedns.afraid.org/) and setup a (sub)Domain Name.
 
@@ -58,7 +60,7 @@ Log in to freedns.afraid.com and click "Dynamic DNS". Right click on "Direct URL
 6. Click Run or Start.
 
 ### no-ip
-Use the DDNS (Dynamic DNS) service by noip.com.
+Use the DDNS (Dynamic DNS) service by [No-IP](https://www.noip.com/).
 
 Run the TUI (`nextcloud-config`) or use the WebUI.
 1. Navigate to `no-ip` in the TUI or the WebUI.
@@ -69,6 +71,14 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change `TIME` with the interval time you want to update the DNS record. Default 30mins.
 7. Click Run or Start.
 
+### DuckDNS
+
+[Duck DNS](https://www.duckdns.org/) is a free dynamic DNS hosted on Amazon VPC.
+
+### spDYN
+
+[spDYN](https://www.spdyn.de/) is a German dynamic DNS service provided by Securepoint GmbH.
+
 ## NFS
 Configure a NFS network file system server. This is a lightweight way to mount your cloud files through LAN in a Linux computer.
 
@@ -76,6 +86,7 @@ Configure a NFS network file system server. This is a lightweight way to mount y
 This is a DNS server that you might need in case you cannot access you cloud from inside your house by the external URL, such as _mycloud.freeDNS.org_. This depends on wether your router supports _NAT loopback_. 
 
 See [this post](https://ownyourbits.com/2017/03/09/dnsmasq-as-dns-cache-server-for-nextcloudpi-and-raspbian/) for details.
+
 ## fail2ban
 As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
 NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
