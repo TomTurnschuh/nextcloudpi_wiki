@@ -10,12 +10,6 @@ In order to enable SSH, the password can not remain set to the default.
 You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
 Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 
-1. Navigate to `SSH` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change the password.
-4. Confirm new password.
-4. Click Run or Start.
-
 ## Automatic updates
 It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
 NextCloudPi can perform automatic updates.
@@ -91,6 +85,14 @@ See [this post](https://ownyourbits.com/2017/03/09/dnsmasq-as-dns-cache-server-f
 As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
 NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
 
+
+| Option			| Description |
+|:------------|:------------|
+|`BANTIME` 		| Duration of a ban for a certain IP address after too many failed login attempts
+|`FINDTIME` 	| Time slot in which  failed login attempts are counted and the IP address gets banned
+|`MAXRETRY` 	| Number of failed login attempts that trigger an IP address ban
+|`MAILALERTS` | Activate/deactivate email notifications
+|`EMAIL`			| Your personal email to receive ban notifications
 
 #### How to activate
 Run the TUI (`nextcloud-config`) or use the WebUI.
