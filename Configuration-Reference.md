@@ -20,7 +20,7 @@ Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
 NextCloudPi can perform automatic updates.
 
-### NextCloudPi: nc-autoupdate-ncp
+### NextCloudPi : `nc-autoupdate-ncp`
 Automatically update NextCloudPi.
 
 #### How to enable
@@ -29,7 +29,7 @@ Automatically update NextCloudPi.
 3. Change the user to be notified when new updates are installed (default=admin).
 4. Click Run or Start.
 
-### Nextcloud: unattended-upgrades
+### Nextcloud : `unattended-upgrades`
 Enable Automatic installation of security updates to keep your cloud safe.
 
 #### How to enable
