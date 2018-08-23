@@ -124,6 +124,43 @@ In order to trust a connection to a website and send your user name and password
 3. Change the `EMAIL` with your Email address. (It is recomended to use a valid Email address)
 4. Click Run or Start.
 
+## Data structure
+
+### Automount USB drives : `nc-automount`
+Enable this feature if you want your Rasperry Pi to automount USB drives.
+
+### Format USB drive : `nc-format-USB`
+Do this if you want to format your USB Drive and make it compatible with linux user/permissions system
+
+> Make sure that **ONLY** the USB drive that you want to format is plugged in. 
+
+> Be careful, this will destroy **ALL** data in the USB drive. Make sure that the Nextcloud database is not located on this drive!
+
+>** YOU WILL LOSE ALL YOUR USB DATA **
+
+#### How to run
+1. Navigate to `nc-format-USB` in the TUI or the WebUI.
+2. Change `LABEL` to a label you like.
+3. Click Run or Start.
+
+### Location of Nextcloud database : `nc-database`
+Enable if you want to change the Nextcloud database location (e.g. to a usb drive).
+
+> **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system.
+
+>You need to use a USB drive that is permanently on and is responsive or the database will fail.     
+
+> ** If it ever fails with a white page, move the database back to the SD **
+
+#### How to configure
+1. Navigate to `nc-database` in the TUI or the WebUI.
+2. Change `DBDIR` to your database location.
+3. Click Run or Start.
+
+### Location of Nextcloud data : `nc-datadir`
+Change the `data` folder location of Nextcloud.
+
+> **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system
 
 ## modsecurity
 Web Application Firewall for extra security (experimental)
@@ -134,8 +171,7 @@ The downside is that it can break some Apps, so disable it if something doesn't 
 
 Learn more [here](https://ownyourbits.com/2017/03/23/modsecurity-web-application-firewall-for-nextcloud/)
 
-## nc-automount
-Enable this feature if you want your Rasperry Pi to automount USB drives.
+
 
 #### How to enable
 1. Navigate to `nc-automount` in the TUI or the WebUI.
@@ -154,7 +190,7 @@ Perform automatic backups.
 6. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
 7. Click Run or Start.
 
-## Backup : ´nc-backup´
+## Backup : `nc-backup`
 Perform a manual backup.
 
 #### How to configure
@@ -164,43 +200,7 @@ Perform a manual backup.
 4. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
 5. Click Run or Start.
 
-## nc-database
-Enable if you want to change the Nextcloud database location (e.x. to a usb drive).
 
-> **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system.
-
->You need to use a USB drive that is permanently on and is responsive or the database will fail.     
-
-> ** If it ever fails with a white page, move the database back to the SD **
-
-#### How to configure
-1. Navigate to `nc-database` in the TUI or the WebUI.
-2. Change `DBDIR` to your database location.
-3. Click Run or Start.
-
-## nc-datadir
-Change the `data` folder location of Nextcloud.
-
-> **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system  
-
-#### How to configure
-1. Navigate to `nc-datadir` in the TUI or the WebUI.
-2. Change `DATADIR` to your data location.
-3. Click Run or Start.
-
-## nc-format-USB
-Do this if you want to format your USB Drive and make it compatible with linux user/permissions system
-
-> Make sure that **ONLY** the USB drive that you want to format is plugged in. 
-
-> Be careful, this will destroy **ALL** data in the USB drive
-
->** YOU WILL LOSE ALL YOUR USB DATA **   
-
-#### How to run
-1. Navigate to `nc-format-USB` in the TUI or the WebUI.
-2. Change `LABEL` to a label you like.
-3. Click Run or Start.
 
 ## nc-forward-ports
 NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
