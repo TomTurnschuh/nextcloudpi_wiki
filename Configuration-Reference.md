@@ -3,6 +3,15 @@
 
 [//]: Comment
 
+<h3>
+
+```diff
+! TODO !
+```
+</h3>
+
+- [ ] Update references in all the configuration entry files.
+
 ## SSH access : `SSH`
 
 SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
@@ -145,7 +154,7 @@ Perform automatic backups.
 6. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
 7. Click Run or Start.
 
-## nc-backup
+## Backup : ´nc-backup´
 Perform a manual backup.
 
 #### How to configure
