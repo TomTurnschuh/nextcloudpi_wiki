@@ -12,12 +12,87 @@
 
 - [ ] Update references in all the configuration entry files.
 
-## SSH access : `SSH`
+## Accessability
+
+### NCP web interface : `nc-webui`
+Enable or disable the WebUI.
+
+### How to enable
+1. Navigate to `nc-webui` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+
+### SSH access : `SSH`
 
 SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
 In order to enable SSH, the password can not remain set to the default.
 You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
 Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
+
+### nc-forward-ports
+NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
+
+#### Requirements
+You need to enable UPnP on your Router. Also disable it after you configure port forwarding.
+
+#### How to configure
+1. Navigate to `nc-forward-ports` in the TUI or the WebUI.
+2. Set the ports your Nextcloud runs on. (It is recomended that you use the defaults)
+3. Click Run or Start.
+
+
+## Security
+
+### Force secure HTTPS connections : `nc-httpsonly`
+Force secure connection using HTTPS.
+
+#### How to enable
+1. Navigate to `nc-httpsonly` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Click Run or Start.
+
+### fail2ban
+As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
+NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
+
+
+| Option			| Description |
+|:------------|:------------|
+|`BANTIME` 		| Duration of a ban for a certain IP address after too many failed login attempts
+|`FINDTIME` 	| Time slot in which  failed login attempts are counted and the IP address gets banned
+|`MAXRETRY` 	| Number of failed login attempts that trigger an IP address ban
+|`MAILALERTS` | Activate/deactivate email notifications
+|`EMAIL`			| Your personal email to receive ban notifications
+
+#### How to activate
+Run the TUI (`nextcloud-config`) or use the WebUI.
+1. Change `ACTIVE` to `yes`
+2. Change (optional) `BANTIME` (in seconds, default: 600 = 10 minutes) to change the duration of a ban for a certain IP address after too many failed login attempts.
+3. Change (optional) `FINDTIME` (in seconds, default: 600 = 10 minutes) to change the time slot in which  failed login attempts are counted and the IP address gets banned.
+4. Change (optional) `MAXRETRY` (default: 6 attempts) to change the number of failed login attempts that trigger an IP address ban.
+5. Change (optional) `EMAIL` with your personal email to receive ban notifications.
+6. Change (optional) `MAILALERTS` to activate/deactivate email notifications.
+7. Click Run (WebUI) or Start (TUI)
+
+### Certificates for secure connection : `letsencrypt`
+
+In order to trust a connection to a website and send your user name and password, you need a SSL certificate. The SSL certificate ensures that the communication is encrypted, so everything you send can only be viewed by the server and not someone who impersonates him. By default NextCloudPi provides a self signed SSL certificate in order to encrypt your communication but it is strongly recomended that you use a certificate from a certificate authority. The NextCloudPi can run the Let's Encrypt client which gets a certificate from https://letsencrypt.org for your (sub)Domain Name. NextCloudPi also configures the web server to use it and renews the certificate once a month.
+
+#### Configure
+1. Navigate to `letsencrypt` in the TUI or the WebUI.
+2. Change the `DOMAIN` with your (sub)Domain Name.
+3. Change the `EMAIL` with your Email address. (It is recomended to use a valid Email address)
+4. Click Run or Start.
+
+
+### modsecurity
+Web Application Firewall for extra security (experimental)
+
+This is a really strong layer of security that makes sure that even if there is a vulnerability in Nextcloud code, it will be blocked by modsecurity in most cases.
+
+The downside is that it can break some Apps, so disable it if something doesn't work for you. Tested with the most common Apps.
+
+Learn more [here](https://ownyourbits.com/2017/03/23/modsecurity-web-application-firewall-for-nextcloud/)
+
 
 ## Automatic updates
 It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
@@ -90,39 +165,7 @@ This is a DNS server that you might need in case you cannot access you cloud fro
 
 See [this post](https://ownyourbits.com/2017/03/09/dnsmasq-as-dns-cache-server-for-nextcloudpi-and-raspbian/) for details.
 
-## fail2ban
-As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
-NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
 
-
-| Option			| Description |
-|:------------|:------------|
-|`BANTIME` 		| Duration of a ban for a certain IP address after too many failed login attempts
-|`FINDTIME` 	| Time slot in which  failed login attempts are counted and the IP address gets banned
-|`MAXRETRY` 	| Number of failed login attempts that trigger an IP address ban
-|`MAILALERTS` | Activate/deactivate email notifications
-|`EMAIL`			| Your personal email to receive ban notifications
-
-#### How to activate
-Run the TUI (`nextcloud-config`) or use the WebUI.
-1. Change `ACTIVE` to `yes`
-2. Change (optional) `BANTIME` (in seconds, default: 600 = 10 minutes) to change the duration of a ban for a certain IP address after too many failed login attempts.
-3. Change (optional) `FINDTIME` (in seconds, default: 600 = 10 minutes) to change the time slot in which  failed login attempts are counted and the IP address gets banned.
-4. Change (optional) `MAXRETRY` (default: 6 attempts) to change the number of failed login attempts that trigger an IP address ban.
-5. Change (optional) `EMAIL` with your personal email to receive ban notifications.
-6. Change (optional) `MAILALERTS` to activate/deactivate email notifications.
-7. Click Run (WebUI) or Start (TUI)
-
-
-## letsencrypt
-
-In order to trust a connection to a website and send your user name and password, you need a SSL certificate. The SSL certificate ensures that the communication is encrypted, so everything you send can only be viewed by the server and not someone who impersonates him. By default NextCloudPi provides a self signed SSL certificate in order to encrypt your communication but it is strongly recomended that you use a certificate from a certificate authority. The NextCloudPi can run the Let's Encrypt client which gets a certificate from https://letsencrypt.org for your (sub)Domain Name. NextCloudPi also configures the web server to use it and renews the certificate once a month.
-
-#### Configure
-1. Navigate to `letsencrypt` in the TUI or the WebUI.
-2. Change the `DOMAIN` with your (sub)Domain Name.
-3. Change the `EMAIL` with your Email address. (It is recomended to use a valid Email address)
-4. Click Run or Start.
 
 ## Data structure
 
@@ -162,15 +205,6 @@ Change the `data` folder location of Nextcloud.
 
 > **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system
 
-## modsecurity
-Web Application Firewall for extra security (experimental)
-
-This is a really strong layer of security that makes sure that even if there is a vulnerability in Nextcloud code, it will be blocked by modsecurity in most cases.
-
-The downside is that it can break some Apps, so disable it if something doesn't work for you. Tested with the most common Apps.
-
-Learn more [here](https://ownyourbits.com/2017/03/23/modsecurity-web-application-firewall-for-nextcloud/)
-
 
 
 #### How to enable
@@ -201,25 +235,6 @@ Perform a manual backup.
 5. Click Run or Start.
 
 
-
-## nc-forward-ports
-NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
-
-#### Requirements
-You need to enable UPnP on your Router. Also disable it after you configure port forwarding.
-
-#### How to configure
-1. Navigate to `nc-forward-ports` in the TUI or the WebUI.
-2. Set the ports your Nextcloud runs on. (It is recomended that you use the defaults)
-3. Click Run or Start.
-
-## nc-httpsonly
-Force secure connection using HTTPS.
-
-#### How to enable
-1. Navigate to `nc-httpsonly` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Click Run or Start.
 
 ## nc-init
 (Re)initiate Nextcloud to a clean configuration.
@@ -287,14 +302,6 @@ Perform a manual update.
 
 #### How to run
 1. Navigate to `nc-update` in the TUI or the WebUI.
-
-## nc-webui
-Enable or disable the WebUI.
-
-### How to enable
-1. Navigate to `nc-webui` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-
 
 
 ## samba
