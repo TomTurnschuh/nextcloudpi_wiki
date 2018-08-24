@@ -12,23 +12,23 @@
 
 - [ ] Update references in all the configuration entry files.
 
-## Accessability
+# Accessability
 
-### NCP web interface : `nc-webui`
+## NCP web interface : `nc-webui`
 Enable or disable the WebUI.
 
-### How to enable
+## How to enable
 1. Navigate to `nc-webui` in the TUI or the WebUI.
 2. Change `ACTIVE` to `yes`.
 
-### SSH access : `SSH`
+## SSH access : `SSH`
 
 SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root* on Armbian devices.
 In order to enable SSH, the password can not remain set to the default.
 You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
 Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 
-### nc-forward-ports
+## nc-forward-ports
 NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
 
 #### Requirements
@@ -40,9 +40,9 @@ You need to enable UPnP on your Router. Also disable it after you configure port
 3. Click Run or Start.
 
 
-## Security
+# Security
 
-### Force secure HTTPS connections : `nc-httpsonly`
+## Force secure HTTPS connections : `nc-httpsonly`
 Force secure connection using HTTPS.
 
 #### How to enable
@@ -50,7 +50,7 @@ Force secure connection using HTTPS.
 2. Change `ACTIVE` to `yes`.
 3. Click Run or Start.
 
-### fail2ban
+## fail2ban
 As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
 NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
 
@@ -73,7 +73,7 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change (optional) `MAILALERTS` to activate/deactivate email notifications.
 7. Click Run (WebUI) or Start (TUI)
 
-### Certificates for secure connection : `letsencrypt`
+## Certificates for secure connection : `letsencrypt`
 
 In order to trust a connection to a website and send your user name and password, you need a SSL certificate. The SSL certificate ensures that the communication is encrypted, so everything you send can only be viewed by the server and not someone who impersonates him. By default NextCloudPi provides a self signed SSL certificate in order to encrypt your communication but it is strongly recomended that you use a certificate from a certificate authority. The NextCloudPi can run the Let's Encrypt client which gets a certificate from https://letsencrypt.org for your (sub)Domain Name. NextCloudPi also configures the web server to use it and renews the certificate once a month.
 
@@ -84,7 +84,7 @@ In order to trust a connection to a website and send your user name and password
 4. Click Run or Start.
 
 
-### modsecurity
+## modsecurity
 Web Application Firewall for extra security (experimental)
 
 This is a really strong layer of security that makes sure that even if there is a vulnerability in Nextcloud code, it will be blocked by modsecurity in most cases.
@@ -94,11 +94,11 @@ The downside is that it can break some Apps, so disable it if something doesn't 
 Learn more [here](https://ownyourbits.com/2017/03/23/modsecurity-web-application-firewall-for-nextcloud/)
 
 
-## Automatic updates
+# Automatic updates
 It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
 NextCloudPi can perform automatic updates.
 
-### NextCloudPi : `nc-autoupdate-ncp`
+## NextCloudPi : `nc-autoupdate-ncp`
 Automatically update NextCloudPi.
 
 #### How to enable
@@ -107,7 +107,7 @@ Automatically update NextCloudPi.
 3. Change the user to be notified when new updates are installed (default=admin).
 4. Click Run or Start.
 
-### Nextcloud : `unattended-upgrades`
+## Nextcloud : `unattended-upgrades`
 Enable Automatic installation of security updates to keep your cloud safe.
 
 #### How to enable
