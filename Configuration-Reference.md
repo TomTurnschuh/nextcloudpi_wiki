@@ -12,14 +12,19 @@
 
 - [ ] Update references in all the configuration entry files.
 
+
+
+
 # Accessability
+
 
 ## NCP web interface : `nc-webui`
 Enable or disable the WebUI.
 
-## How to enable
+#### How to enable
 1. Navigate to `nc-webui` in the TUI or the WebUI.
 2. Change `ACTIVE` to `yes`.
+
 
 ## SSH access : `SSH`
 
@@ -27,6 +32,7 @@ SSH can be enabled for an existing user. This is *pi* on Raspberry Pis or *root*
 In order to enable SSH, the password can not remain set to the default.
 You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
 Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
+
 
 ## nc-forward-ports
 NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
@@ -40,7 +46,10 @@ You need to enable UPnP on your Router. Also disable it after you configure port
 3. Click Run or Start.
 
 
+
+
 # Security
+
 
 ## Force secure HTTPS connections : `nc-httpsonly`
 Force secure connection using HTTPS.
@@ -50,10 +59,10 @@ Force secure connection using HTTPS.
 2. Change `ACTIVE` to `yes`.
 3. Click Run or Start.
 
+
 ## fail2ban
 As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
 NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
-
 
 | Option			| Description |
 |:------------|:------------|
@@ -73,8 +82,8 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change (optional) `MAILALERTS` to activate/deactivate email notifications.
 7. Click Run (WebUI) or Start (TUI)
 
-## Certificates for secure connection : `letsencrypt`
 
+## Certificates for secure connection : `letsencrypt`
 In order to trust a connection to a website and send your user name and password, you need a SSL certificate. The SSL certificate ensures that the communication is encrypted, so everything you send can only be viewed by the server and not someone who impersonates him. By default NextCloudPi provides a self signed SSL certificate in order to encrypt your communication but it is strongly recomended that you use a certificate from a certificate authority. The NextCloudPi can run the Let's Encrypt client which gets a certificate from https://letsencrypt.org for your (sub)Domain Name. NextCloudPi also configures the web server to use it and renews the certificate once a month.
 
 #### Configure
@@ -94,9 +103,12 @@ The downside is that it can break some Apps, so disable it if something doesn't 
 Learn more [here](https://ownyourbits.com/2017/03/23/modsecurity-web-application-firewall-for-nextcloud/)
 
 
+
+
 # Automatic updates
 It is recommended to keep both NextCloudPi and Nextcloud up to date all the time.
 NextCloudPi can perform automatic updates.
+
 
 ## NextCloudPi : `nc-autoupdate-ncp`
 Automatically update NextCloudPi.
@@ -107,6 +119,7 @@ Automatically update NextCloudPi.
 3. Change the user to be notified when new updates are installed (default=admin).
 4. Click Run or Start.
 
+
 ## Nextcloud : `unattended-upgrades`
 Enable Automatic installation of security updates to keep your cloud safe.
 
@@ -116,13 +129,17 @@ Enable Automatic installation of security updates to keep your cloud safe.
 3. Change `AUTOREBOOT` to `yes` if you want your Raspberry Pi to reboot automatically in order to apply updates (optional).
 4. Click Run or Start.
 
-## Dynamic DNS
+
+
+
+# Dynamic DNS
 Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
 One possibility is to do this on your local router. Nevertheless, several providers are direcltly supported by NextCloudPi.
 
 All the required data can be found in your account at the registered DDNS service provider.
 
-### Free DNS : `DDNS_freeDNS`
+
+## Free DNS : `DDNS_freeDNS`
 [FreeDNS](https://freedns.afraid.org/) client.
 
 You need to register an account on [FreeDNS](https://freedns.afraid.org/) and setup a (sub)Domain Name.
@@ -137,7 +154,8 @@ Log in to freedns.afraid.com and click "Dynamic DNS". Right click on "Direct URL
 5. (Optional) Change the `UPDATEINTERVAL` to the interval time you want the client to update your IP (Dynamic IPs do not change that often so you can leave the default (5mins)).
 6. Click Run or Start.
 
-### no-ip : `DDNS_no-ip`
+
+## no-ip : `DDNS_no-ip`
 Use the DDNS (Dynamic DNS) service by [No-IP](https://www.noip.com/).
 
 Run the TUI (`nextcloud-config`) or use the WebUI.
@@ -149,16 +167,14 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 6. Change `TIME` with the interval time you want to update the DNS record. Default 30mins.
 7. Click Run or Start.
 
-### Duck DNS : `DDNS_duckDNS`
 
+## Duck DNS : `DDNS_duckDNS`
 [Duck DNS](https://www.duckdns.org/) is a free dynamic DNS hosted on Amazon VPC.
 
-### spDYN : `DDNS_spDYN`
 
+## spDYN : `DDNS_spDYN`
 [spDYN](https://www.spdyn.de/) is a German dynamic DNS service provided by Securepoint GmbH.
 
-## NFS
-Configure a NFS network file system server. This is a lightweight way to mount your cloud files through LAN in a Linux computer.
 
 ## dnsmasq
 This is a DNS server that you might need in case you cannot access you cloud from inside your house by the external URL, such as _mycloud.freeDNS.org_. This depends on wether your router supports _NAT loopback_. 
@@ -167,12 +183,15 @@ See [this post](https://ownyourbits.com/2017/03/09/dnsmasq-as-dns-cache-server-f
 
 
 
-## Data structure
 
-### Automount USB drives : `nc-automount`
+# Data structure and file system
+
+
+## Automount USB drives : `nc-automount`
 Enable this feature if you want your Rasperry Pi to automount USB drives.
 
-### Format USB drive : `nc-format-USB`
+
+## Format USB drive : `nc-format-USB`
 Do this if you want to format your USB Drive and make it compatible with linux user/permissions system
 
 > Make sure that **ONLY** the USB drive that you want to format is plugged in. 
@@ -186,7 +205,8 @@ Do this if you want to format your USB Drive and make it compatible with linux u
 2. Change `LABEL` to a label you like.
 3. Click Run or Start.
 
-### Location of Nextcloud database : `nc-database`
+
+## Location of Nextcloud database : `nc-database`
 Enable if you want to change the Nextcloud database location (e.g. to a usb drive).
 
 > **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system.
@@ -200,108 +220,20 @@ Enable if you want to change the Nextcloud database location (e.g. to a usb driv
 2. Change `DBDIR` to your database location.
 3. Click Run or Start.
 
-### Location of Nextcloud data : `nc-datadir`
+
+## Location of Nextcloud data : `nc-datadir`
 Change the `data` folder location of Nextcloud.
 
 > **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system
-
-
 
 #### How to enable
 1. Navigate to `nc-automount` in the TUI or the WebUI.
 2. Change `ACTIVE` to yes.
 3. Click Run or Start.
 
-## nc-backup-auto
-Perform automatic backups.
 
-#### How to enable
-1. Navigate to `nc-backup-auto` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change `DESTDIR` to a desired location for the backups.
-4. Change `INCLUDEDATA` to `yes` (optional), to backup your data as well.
-5. Change `BACKUPDAYS` to the number of days to perform the backup.
-6. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
-7. Click Run or Start.
-
-## Backup : `nc-backup`
-Perform a manual backup.
-
-#### How to configure
-1. Navigate to `nc-backup` in the TUI or the WebUI.
-2. Change `DESTDIR` to the desired location you want your backup to be.
-3. Change `INCLUDEDATA` to `yes` if you want to include the Nextcloud data to the backup as well.
-4. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
-5. Click Run or Start.
-
-
-
-## nc-init
-(Re)initiate Nextcloud to a clean configuration.
-
-## nc-limits
-Configure system limits for NextCloudPi.
-
-> **Note** that `MAXFILESIZE` can be at maximum `2G` for now, due to limitation of 32bit php.
-
-#### How to configure
-1. Navigate to `nc-limits` in the TUI or the WebUI.
-2. Change `MAXFILESIZE` to the desired maximum file size (<=2G).
-3. Change `MEMORYLIMIT` to the memory limit you want (default=768M).
-4. Click Run or Start.
-
-## nc-nextcloud
-Download and install a specific Nextcloud version. This destroys any existing instance. You need to run nc-init after completing nc-nextcloud, to take care of setting up database and cron jobs.
-
-## nc-notify-updates
-Get notified for updates (Pending or Installed) through the Nextcloud notification system.
-
-#### How to enable
-1. Navigate to `nc-notify-updates` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Change `USER` to the user you want to be notified (default=admin).
-4. Click Run or Start.
-
-## nc-ramlogs
-Enable mounting logs in RAM to prevent SD degradation (faster, consumes more RAM)
-
-#### How to restore
-1. Navigate to `nc-ramlogs` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-4. Click Run or Start.
-
-## nc-restore
-Restore from a backup.
-
-## nc-scan-auto
-Automate a Nextcloud scan for user files.
-
-#### How to enable
-1. Navigate to `nc-scan-auto` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Set `SCANINTERVAL` to the interval (in minutes) you want to scan every.
-4. Click Run or Start.
-
-## nc-scan
-Perform a Nextcloud scan for user files.
-
-#### How to run
-1. Navigate to `nc-scan` in the TUI or the WebUI.
-
-## nc-swapfile
-Change the location and the size of the swap file.
-
-#### How to configure
-1. Navigate to `nc-swapfile` in the TUI or the WebUI.
-2. Change `SWAPFILE` to the location you want the new swap file to be.
-3. Change `SWAPSIZE` to the desired size of the swap file (default=1024).
-4. Click Run or Start.
-
-## nc-update
-Perform a manual update.
-
-#### How to run
-1. Navigate to `nc-update` in the TUI or the WebUI.
+## NFS
+Configure a NFS network file system server. This is a lightweight way to mount your cloud files through LAN in a Linux computer.
 
 
 ## samba
@@ -315,6 +247,101 @@ Configure SMB/CIFS file server (for Mac/Linux/Windows)
 2. Change `ACTIVE` to `yes`.
 3. Change `NCUSER` to your Nextcloud User (default=admin).
 4. Change `USER` to the NextCloudPi User (default=pi).
-5. Change `PWD` to the NextCloudPi User's Password.
-6. Click Run or Start.
+
+
+## nc-swapfile
+Change the location and the size of the swap file.
+
+#### How to configure
+1. Navigate to `nc-swapfile` in the TUI or the WebUI.
+2. Change `SWAPFILE` to the location you want the new swap file to be.
+3. Change `SWAPSIZE` to the desired size of the swap file (default=1024).
+4. Click Run or Start.
+
+
+
+
+# Maintenance and more
+
+
+## Backup : `nc-backup`
+Perform a manual backup.
+
+#### How to configure
+1. Navigate to `nc-backup` in the TUI or the WebUI.
+2. Change `DESTDIR` to the desired location you want your backup to be.
+3. Change `INCLUDEDATA` to `yes` if you want to include the Nextcloud data to the backup as well.
+4. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
+5. Click Run or Start.
+
+
+### Automated backups : `nc-backup-auto`
+
+#### How to enable
+1. Navigate to `nc-backup-auto` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change `DESTDIR` to a desired location for the backups.
+4. Change `INCLUDEDATA` to `yes` (optional), to backup your data as well.
+5. Change `BACKUPDAYS` to the number of days to perform the backup.
+6. Change `BACKUPLIMIT` to the number of backups to be kept. If limit is reached, then the new backup will replace the older one.
+7. Click Run or Start.
+
+
+### Restore from backup : `nc-restore`
+
+
+## nc-init
+(Re)initiate Nextcloud to a clean configuration.
+
+
+## nc-limits
+Configure system limits for NextCloudPi.
+
+> **Note** that `MAXFILESIZE` can be at maximum `2G` for now, due to limitation of 32bit php.
+
+#### How to configure
+1. Navigate to `nc-limits` in the TUI or the WebUI.
+2. Change `MAXFILESIZE` to the desired maximum file size (<=2G).
+3. Change `MEMORYLIMIT` to the memory limit you want (default=768M).
+4. Click Run or Start.
+
+
+## nc-nextcloud
+Download and install a specific Nextcloud version. This destroys any existing instance. You need to run nc-init after completing nc-nextcloud, to take care of setting up database and cron jobs.
+
+
+## nc-notify-updates
+Get notified for updates (Pending or Installed) through the Nextcloud notification system.
+
+#### How to enable
+1. Navigate to `nc-notify-updates` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Change `USER` to the user you want to be notified (default=admin).
+4. Click Run or Start.
+
+
+## nc-ramlogs
+Enable mounting logs in RAM to prevent SD degradation (faster, consumes more RAM)
+
+#### How to restore
+1. Navigate to `nc-ramlogs` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+4. Click Run or Start.
+
+
+## nc-scan
+Perform a Nextcloud scan for user files.
+
+#### How to run
+1. Navigate to `nc-scan` in the TUI or the WebUI.
+
+
+### nc-scan-auto
+Automate a Nextcloud scan for user files.
+
+#### How to enable
+1. Navigate to `nc-scan-auto` in the TUI or the WebUI.
+2. Change `ACTIVE` to `yes`.
+3. Set `SCANINTERVAL` to the interval (in minutes) you want to scan every.
+4. Click Run or Start.
 
