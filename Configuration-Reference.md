@@ -133,6 +133,8 @@ Enable Automatic installation of security updates to keep your cloud safe.
 
 
 # Dynamic DNS
+
+
 Most home users do not have a static IP but rather a dynamic IP that changes from time to time. in order for you to be able to access your Nextcloud instance, from outside of your house, without typing an IP address you need a DDNS service which tracks IP changes and updates the DNS records. 
 One possibility is to do this on your local router. Nevertheless, several providers are direcltly supported by NextCloudPi.
 
@@ -215,6 +217,8 @@ Enable if you want to change the Nextcloud database location (e.g. to a usb driv
 
 > ** If it ever fails with a white page, move the database back to the SD **
 
+The original location on the SD card is ...
+
 #### How to configure
 1. Navigate to `nc-database` in the TUI or the WebUI.
 2. Change `DBDIR` to your database location.
@@ -225,6 +229,8 @@ Enable if you want to change the Nextcloud database location (e.g. to a usb driv
 Change the `data` folder location of Nextcloud.
 
 > **Note** that non Unix filesystems such as NTFS are not supported because they do not provide a compatible user/permissions system
+
+The original location on the SD card is ...
 
 #### How to enable
 1. Navigate to `nc-automount` in the TUI or the WebUI.
