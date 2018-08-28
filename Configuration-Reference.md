@@ -13,8 +13,6 @@
 - [ ] Update references in all the configuration entry files.
 
 
-
-
 # Accessability
 
 
@@ -33,6 +31,15 @@ In order to enable SSH, the password can not remain set to the default.
 You HAVE to create a NEW password for the user if you want this program to enable SSH, it will fail if you dont!
 Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 
+| Option    | Description |
+|:----------|:------------|
+| `ACTIVE`  | Indicates whether NCP can be accessed by SSH or not.
+| `USER`    | User to grant SSH access to. It is automatically set to the root user of your device.
+| `PASS`    | Password for above defined user. It must not be the default password.
+| `CONFIRM` | Confirmation of `PASS`.
+
+Click `Run` or `Start` to apply your changes.
+
 
 ## nc-forward-ports
 NextCloudPi has implemented a UPnP client to be able to configure the Router to port forward to your Raspberry Pi.
@@ -47,12 +54,12 @@ You need to enable UPnP on your Router. Also disable it after you configure port
 
 
 
-
+------
 # Security
 
 
 ## Force secure HTTPS connections : `nc-httpsonly`
-Force secure connection using HTTPS.
+Force secure connection using HTTPS. This option is highly recommended.
 
 #### How to enable
 1. Navigate to `nc-httpsonly` in the TUI or the WebUI.
@@ -60,17 +67,40 @@ Force secure connection using HTTPS.
 3. Click Run or Start.
 
 
+## Firewall : `UFW`
+Uncomplicated firewall that blocks traffic on all non-used ports.
+
+| Option			| Description |
+|:------------|:------------|
+|`ACTIVE` | Enables or disables the UFW.
+|`HTTP`   | Port for your HTTP traffic. Usually it is `80`.
+|`HTTPS`  | Port for your HTTPS traffic. Usually it is `443`.
+|`SSH`    | Port for your SSH traffic. Usually it is `22`.
+
+
 ## fail2ban
 As soon as your NextClouPi is connected to the internet it might get attacked. Most attacks are probably automated attacks by botnets or scripts trying to break into your System by simply using standard username/password combinations like admin/admin. [fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-fail2ban-works2) scans your webserver logs (which can be found under /var/log/apache2/error.log) for failed login attempts. If there are to many failed attempts (default is 6 failed attempts within 10 minutes) fail2ban will ban the attacker's IP address for a certain amount of time (default is 10 minutes). If you activate mail alerts you will receive emails when fail2ban locks out certain IP addresses. 
 NextCloudPi uses fail2ban to secure Nextcloud logins as well as SSH logins.
 
-| Option			| Description |
+| Option	  | Description |
 |:------------|:------------|
+|`ACTIVE`     | Has a tick if fail2ban is active
 |`BANTIME` 		| Duration of a ban for a certain IP address after too many failed login attempts
-|`FINDTIME` 	| Time slot in which  failed login attempts are counted and the IP address gets banned
+|`FINDTIME` 	| Time slot (in seconds) in which failed login attempts are counted and the IP address gets banned
 |`MAXRETRY` 	| Number of failed login attempts that trigger an IP address ban
 |`MAILALERTS` | Activate/deactivate email notifications
 |`EMAIL`			| Your personal email to receive ban notifications
+
+#### Options
+`BANTIME` : Duration of a ban for a certain IP address after too many failed login attempts
+
+`FINDTIME` : Time slot in which failed login attempts are counted and the IP address gets banned
+
+`MAXRETRY` : Number of failed login attempts that trigger an IP address ban
+
+`MAILALERTS` : Activate/deactivate email notifications
+
+`EMAIL` : Your personal email to receive ban notifications
 
 #### How to activate
 Run the TUI (`nextcloud-config`) or use the WebUI.
@@ -132,6 +162,8 @@ Enable Automatic installation of security updates to keep your cloud safe.
 
 
 
+---
+
 # Dynamic DNS
 
 
@@ -174,12 +206,14 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 [Duck DNS](https://www.duckdns.org/) is a free dynamic DNS hosted on Amazon VPC.
 
 
+
+
 ## spDYN : `DDNS_spDYN`
 [spDYN](https://www.spdyn.de/) is a German dynamic DNS service provided by Securepoint GmbH.
 
 
 ## dnsmasq
-This is a DNS server that you might need in case you cannot access you cloud from inside your house by the external URL, such as _mycloud.freeDNS.org_. This depends on wether your router supports _NAT loopback_. 
+This is a DNS server that you might need in case you cannot access your cloud from inside your house by the external URL, such as _mycloud.freeDNS.org_. This depends on wether your router supports _NAT loopback_. 
 
 See [this post](https://ownyourbits.com/2017/03/09/dnsmasq-as-dns-cache-server-for-nextcloudpi-and-raspbian/) for details.
 
@@ -240,6 +274,16 @@ The original location on the SD card is ...
 
 ## NFS
 Configure a NFS network file system server. This is a lightweight way to mount your cloud files through LAN in a Linux computer.
+
+| Option   | Description |
+|:---------|:------------|
+| `ACTIVE` | Indicates whether NFS is active or not
+| `DIR`    |
+| `SUBNET` |
+| `User`   |
+| `GROUP`  |
+
+Click `Run` or `Start` to apply your changes.
 
 
 ## samba
