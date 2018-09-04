@@ -20,8 +20,8 @@
 Enable or disable the WebUI.
 
 #### How to enable
-1. Navigate to `nc-webui` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
+1. Change `ACTIVE` to `yes`.
+2. Click `Run` or `Start` to apply your changes.
 
 
 ## SSH access : `SSH`
@@ -38,7 +38,10 @@ Note: Use normal AlphaNumeric, the only special characters allowed are .,@-_/
 | `PASS`    | Password for above defined user. It must not be the default password.
 | `CONFIRM` | Confirmation of `PASS`.
 
-Click `Run` or `Start` to apply your changes.
+#### How to enable
+1. Change `ACTIVE` to `yes`.
+2. Define a password and confirm it.
+3. Click `Run` or `Start` to apply your changes.
 
 
 ## nc-forward-ports
@@ -62,9 +65,8 @@ You need to enable UPnP on your Router. Also disable it after you configure port
 Force secure connection using HTTPS. This option is highly recommended.
 
 #### How to enable
-1. Navigate to `nc-httpsonly` in the TUI or the WebUI.
-2. Change `ACTIVE` to `yes`.
-3. Click Run or Start.
+1. Change `ACTIVE` to `yes`.
+2. Click `Run` or `Start` to apply your change.
 
 
 ## Firewall : `UFW`
