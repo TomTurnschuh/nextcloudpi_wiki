@@ -213,6 +213,9 @@ Run the TUI (`nextcloud-config`) or use the WebUI.
 ## spDYN : `DDNS_spDYN`
 [spDYN](https://www.spdyn.de/) is a German dynamic DNS service provided by Securepoint GmbH.
 
+When adding a host in your spDYN account, make sure that you choose an IPv4 host (type ´A´). You can enter just about any IP address, even a local one such as ´192.168.1.50´. This IP gets updated as soon as you activate spDYN in NextCloudPi.
+Be aware that it may take more than half an hour until the DNS cache records in the internet are updated and your cloud is accessible using your new domain. During this time, even Let's Encrypt is not possible to activate.
+
 
 ## dnsmasq
 This is a DNS server that you might need in case you cannot access your cloud from inside your house by the external URL, such as _mycloud.freeDNS.org_. This depends on wether your router supports _NAT loopback_. 
